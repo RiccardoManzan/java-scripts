@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Resetting update intervals for maven remote repositories"
+echo "Removing following metadata files:"
+echo ""
+find ~/.m2/repository -name "*.lastUpdated" -type f -print -exec rm -rf {} \;
+
+# With Maven 3.0.x, when an artifact is downloaded from a repository, maven leaves a _maven.repositories file to record where the file was resolved from.
+# No need to remove that info then.
+# find ~/.m2/repository -name "_remote.repositories" -type f -print -exec rm -rf {} \;
+
+echo ""
+echo "Files correctly deleted, at next maven operation, related artifacts will be updated."

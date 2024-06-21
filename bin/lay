@@ -1,0 +1,113 @@
+#!/bin/bash
+
+base_path="//wsl.localhost/Ubuntu/home/rmanzan/.scripts/src/layouts"
+LAY=${1,,}
+case $LAY in
+    irp-all)
+        cmd.exe /c $base_path/irp-frame-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/irp-core-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/irp-rec-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/irp-libs-layout.bat
+        sleep 1
+        cmd.exe /c $base_path/irp-helm.bat
+        sleep 1
+        cmd.exe /c $base_path/irp-sts-sync-layout.bat
+        sleep 1
+        cmd.exe /c $base_path/irp-stov-sync-layout.bat
+        ;;
+    irp-frame)
+        cmd.exe /c $base_path/irp-frame-layout.bat
+        ;;
+    irp-core)
+        cmd.exe /c $base_path/irp-core-layout.bat
+        ;;
+    irp-sts-sync)
+        cmd.exe /c $base_path/irp-sts-sync-layout.bat
+        ;;
+    irp-stov-sync)
+        cmd.exe /c $base_path/irp-stov-sync-layout.bat
+        ;;
+    irp-rec)
+        cmd.exe /c $base_path/irp-rec-layout.bat
+        ;;
+    irp-libs)
+        cmd.exe /c $base_path/irp-libs-layout.bat
+        ;;
+    irp-helm)
+        cmd.exe /c $base_path/irp-helm.bat
+        ;;
+    deco)
+        cmd.exe /c $base_path/deco-layout.bat
+        ;;
+    deco-libs)
+        cmd.exe /c $base_path/deco-libs-layout.bat
+        ;;
+    deco-skipper)
+        cmd.exe /c $base_path/skipper-layout.bat
+        ;;
+    deco-pwm)
+        cmd.exe /c $base_path/pwm-layout.bat
+        ;;
+    deco-all)
+        cmd.exe /c $base_path/deco-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/skipper-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/pwm-layout.bat
+        sleep 3
+        cmd.exe /c $base_path/deco-libs-layout.bat
+        ;;
+    bbx)
+        cmd.exe /c $base_path/bbx-layout.bat
+        ;;
+    wft)
+        cmd.exe /c $base_path/wft-layout.bat
+        ;;
+    vrs-all)
+        cmd.exe /c $base_path/vrs-cp-layout.bat
+        sleep 1
+        cmd.exe /c $base_path/vrs-secnet-layout.bat
+        sleep 1
+        cmd.exe /c $base_path/vrs-ansible-layout.bat
+        sleep 1
+        cmd.exe /c $base_path/vrs-keepass.bat
+        ;;
+    vrs-cp)
+        cmd.exe /c $base_path/vrs-cp-layout.bat
+        ;;
+    vrs-secnet)
+        cmd.exe /c $base_path/vrs-secnet-layout.bat
+        ;;
+    vrs-ansible)
+        cmd.exe /c $base_path/vrs-ansible-layout.bat
+        ;;
+    vrs-keepass)
+        cmd.exe /c $base_path/vrs-keepass-layout.bat
+        ;;
+    *)
+        echo "unknown layout, please use one of"
+        echo "- IRP-ALL"
+        echo "  - IRP-FRAME"
+        echo "  - IRP-CORE"
+        echo "  - IRP-STS-SYNC"
+        echo "  - IRP-STOV-SYNC"
+        echo "  - IRP-REC"
+        echo "  - IRP-LIBS"
+        echo "- DECO-ALL"
+        echo "  - DECO"
+        echo "  - DECO-SKIPPER"
+        echo "  - DECO-PWM"
+        echo "  - DECO-LIBS"
+        echo "- BBX                 (Just dbx/gdrive plugin)" 
+        echo "- WFT                 (Just agon + cp)" 
+        echo "- VRS-ALL"
+        echo "  - VRS-CP"
+        echo "  - VRS-SECNET        (all microservices)"
+        echo "  - VRS-ANSIBLE"
+        echo "  - VRS-KEEPASS"
+        ;;
+esac
+    

@@ -1,0 +1,198 @@
+#!/bin/bash
+
+VOLATILE=false
+VERSION=${1,,}
+shift
+
+
+while [ $# -gt 0 ]; do
+case $1 in
+
+    # -h | --help)
+    # usage
+    # exit 0
+    # ;;
+
+    -v | --volatile) VOLATILE=true;;
+    
+    *)
+    echo "Invalid option: $1" >&2
+    exit 1
+    ;;
+
+esac
+shift
+done
+
+if [ "$VOLATILE" != true ] ; then
+    echo updating alternatives 🥎🏀🏐🎱⚾⚽
+fi
+case $VERSION in
+    8)
+        INSTALL_PATH=/usr/lib/jvm/java-8-openjdk-amd64
+        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+        if [ "$VOLATILE" != true ] ; then
+            sudo update-java-alternatives --jre --set java-1.8.0-openjdk-amd64
+        fi
+        
+        ;;
+    11)
+        INSTALL_PATH=/usr/lib/jvm/java-11-openjdk-amd64
+        if [ "$VOLATILE" != true ] ; then
+            sudo update-java-alternatives --jre --set java-1.11.0-openjdk-amd64
+        fi
+        ;;
+    11-pp)
+        INSTALL_PATH=/usr/lib/jvm/java-11-openjdk-amd64-privileged-ports
+
+        if [ "$VOLATILE" != true ] ; then
+            sudo update-alternatives --set jaotc        ${INSTALL_PATH}/bin/jaotc
+            sudo update-alternatives --set jar          ${INSTALL_PATH}/bin/jar
+            sudo update-alternatives --set jarsigner    ${INSTALL_PATH}/bin/jarsigner
+            sudo update-alternatives --set java         ${INSTALL_PATH}/bin/java
+            sudo update-alternatives --set javac        ${INSTALL_PATH}/bin/javac
+            sudo update-alternatives --set javadoc      ${INSTALL_PATH}/bin/javadoc
+            sudo update-alternatives --set javap        ${INSTALL_PATH}/bin/javap
+            sudo update-alternatives --set jcmd         ${INSTALL_PATH}/bin/jcmd
+            sudo update-alternatives --set jconsole     ${INSTALL_PATH}/bin/jconsole
+            sudo update-alternatives --set jdb          ${INSTALL_PATH}/bin/jdb
+            sudo update-alternatives --set jdeprscan    ${INSTALL_PATH}/bin/jdeprscan
+            sudo update-alternatives --set jdeps        ${INSTALL_PATH}/bin/jdeps
+            sudo update-alternatives --set jexec        ${INSTALL_PATH}/lib/jexec
+            sudo update-alternatives --set jfr          ${INSTALL_PATH}/bin/jfr
+            sudo update-alternatives --set jhsdb        ${INSTALL_PATH}/bin/jhsdb
+            sudo update-alternatives --set jimage       ${INSTALL_PATH}/bin/jimage
+            sudo update-alternatives --set jinfo        ${INSTALL_PATH}/bin/jinfo
+            sudo update-alternatives --set jjs          ${INSTALL_PATH}/bin/jjs
+            sudo update-alternatives --set jlink        ${INSTALL_PATH}/bin/jlink
+            sudo update-alternatives --set jmap         ${INSTALL_PATH}/bin/jmap
+            sudo update-alternatives --set jmod         ${INSTALL_PATH}/bin/jmod
+            sudo update-alternatives --set jps          ${INSTALL_PATH}/bin/jps
+            sudo update-alternatives --set jshell       ${INSTALL_PATH}/bin/jshell
+            sudo update-alternatives --set jstack       ${INSTALL_PATH}/bin/jstack
+            sudo update-alternatives --set jstat        ${INSTALL_PATH}/bin/jstat
+            sudo update-alternatives --set jstatd       ${INSTALL_PATH}/bin/jstatd
+            sudo update-alternatives --set keytool      ${INSTALL_PATH}/bin/keytool
+            sudo update-alternatives --set pack200      ${INSTALL_PATH}/bin/pack200
+            sudo update-alternatives --set rmic         ${INSTALL_PATH}/bin/rmic
+            sudo update-alternatives --set rmid         ${INSTALL_PATH}/bin/rmid
+            sudo update-alternatives --set rmiregistry  ${INSTALL_PATH}/bin/rmiregistry
+            sudo update-alternatives --set serialver    ${INSTALL_PATH}/bin/serialver
+            sudo update-alternatives --set unpack200    ${INSTALL_PATH}/bin/unpack200
+        fi
+
+        ;;
+    17)
+        INSTALL_PATH=/usr/lib/jvm/java-17-openjdk-amd64
+        if [ "$VOLATILE" != true ] ; then
+            sudo update-java-alternatives --jre --set java-1.17.0-openjdk-amd64
+        fi
+        ;;
+    21)
+        export INSTALL_PATH=/usr/lib/jvm/java-21-openjdk-amd64
+        if [ "$VOLATILE" != true ] ; then
+            sudo update-java-alternatives --jre --set java-1.21.0-openjdk-amd64
+        fi
+        ;;
+    *)
+        echo "unknown JAVA version, please use one of"
+        echo "- 8"
+        echo "- 11"
+        echo "- 11-pp"
+        echo "- 17"
+        echo "- 21"
+        exit
+        ;;
+esac
+
+if [ "$VOLATILE" = true ] ; then
+
+    echo 'Setting java aliases as per volatile option 🪁'
+
+    alias jaotc="${INSTALL_PATH}/bin/jaotc"
+    alias jar="${INSTALL_PATH}/bin/jar"
+    alias jarsigner="${INSTALL_PATH}/bin/jarsigner"
+    alias java="${INSTALL_PATH}/bin/java"
+    alias javac="${INSTALL_PATH}/bin/javac"
+    alias javadoc="${INSTALL_PATH}/bin/javadoc"
+    alias javap="${INSTALL_PATH}/bin/javap"
+    alias jcmd="${INSTALL_PATH}/bin/jcmd"
+    alias jconsole="${INSTALL_PATH}/bin/jconsole"
+    alias jdb="${INSTALL_PATH}/bin/jdb"
+    alias jdeprscan="${INSTALL_PATH}/bin/jdeprscan"
+    alias jdeps="${INSTALL_PATH}/bin/jdeps"
+    alias jexec="${INSTALL_PATH}/lib/jexec"
+    alias jfr="${INSTALL_PATH}/bin/jfr"
+    alias jhsdb="${INSTALL_PATH}/bin/jhsdb"
+    alias jimage="${INSTALL_PATH}/bin/jimage"
+    alias jinfo="${INSTALL_PATH}/bin/jinfo"
+    alias jjs="${INSTALL_PATH}/bin/jjs"
+    alias jlink="${INSTALL_PATH}/bin/jlink"
+    alias jmap="${INSTALL_PATH}/bin/jmap"
+    alias jmod="${INSTALL_PATH}/bin/jmod"
+    alias jps="${INSTALL_PATH}/bin/jps"
+    alias jshell="${INSTALL_PATH}/bin/jshell"
+    alias jstack="${INSTALL_PATH}/bin/jstack"
+    alias jstat="${INSTALL_PATH}/bin/jstat"
+    alias jstatd="${INSTALL_PATH}/bin/jstatd"
+    alias keytool="${INSTALL_PATH}/bin/keytool"
+    alias pack200="${INSTALL_PATH}/bin/pack200"
+    alias rmic="${INSTALL_PATH}/bin/rmic"
+    alias rmid="${INSTALL_PATH}/bin/rmid"
+    alias rmiregistry="${INSTALL_PATH}/bin/rmiregistry"
+    alias serialver="${INSTALL_PATH}/bin/serialver"
+    alias unpack200="${INSTALL_PATH}/bin/unpack200"
+    alias jrunscript="${INSTALL_PATH}/bin/jrunscript"
+else 
+
+    echo 'Removing java aliases ♻️'
+
+    unalias jaotc 2> /dev/null
+    unalias jar 2> /dev/null
+    unalias jarsigner 2> /dev/null
+    unalias java 2> /dev/null
+    unalias javac 2> /dev/null
+    unalias javadoc 2> /dev/null
+    unalias javap 2> /dev/null
+    unalias jcmd 2> /dev/null
+    unalias jconsole 2> /dev/null
+    unalias jdb 2> /dev/null
+    unalias jdeprscan 2> /dev/null
+    unalias jdeps 2> /dev/null
+    unalias jexec 2> /dev/null
+    unalias jfr 2> /dev/null
+    unalias jhsdb 2> /dev/null
+    unalias jimage 2> /dev/null
+    unalias jinfo 2> /dev/null
+    unalias jjs 2> /dev/null
+    unalias jlink 2> /dev/null
+    unalias jmap 2> /dev/null
+    unalias jmod 2> /dev/null
+    unalias jps 2> /dev/null
+    unalias jshell 2> /dev/null
+    unalias jstack 2> /dev/null
+    unalias jstat 2> /dev/null
+    unalias jstatd 2> /dev/null
+    unalias keytool 2> /dev/null
+    unalias pack200 2> /dev/null
+    unalias rmic 2> /dev/null
+    unalias rmid 2> /dev/null
+    unalias rmiregistry 2> /dev/null
+    unalias serialver 2> /dev/null
+    unalias unpack200 2> /dev/null
+    unalias jrunscript 2> /dev/null
+fi
+
+export JAVA_HOME=${INSTALL_PATH}/
+export JDK_HOME=$JAVA_HOME
+
+if [ "$VOLATILE" != true ] ; then
+    sudo update-alternatives --set 'jrunscript' "${JAVA_HOME}bin/jrunscript"
+    echo $JDK_HOME > ~/.javahome
+fi
+
+# export PATH=$PATH:$JAVA_HOME
+echo Switched to ☕JAVA☕ $VERSION
+echo
+source jvv
+    
