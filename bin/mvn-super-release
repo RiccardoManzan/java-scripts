@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+    echo 'Please. pass the version number as the only argument.'
+    exit 0
+fi
+
+echo "Releasing version to $1"
+
+set -x
+set -e 
+set -o pipefail
+
+mvn versions:set -DnewVersion=${1}
+mvn versions:commit
+
+git commit -am "version to ${1}"
+git tag ${1}
+#git push
+#git push origin ${1}
+
+set +x
+
+echo "Version $1 released"
